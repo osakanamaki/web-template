@@ -1,0 +1,19 @@
+main {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-content: start;
+    gap: 1rem;
+}
+
+main > * {grid-column: span 12;}
+
+.w-100{grid-column: span 12;}
+.w-75{grid-column: span 9;}
+.w-66{grid-column: span 8;}
+.w-50{grid-column: span 6;}
+.w-33{grid-column: span 4;}
+.w-25{grid-column: span 3;}
+
+@media (max-width: 600px) {
+    main > [class*="w-"] {grid-column: span 12;}
+}

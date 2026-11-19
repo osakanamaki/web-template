@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>サンプルページ | サイト名</title>
+
+	<!-- 階層が1つ深くなるごとに ../ を1つ足す（このページは pages/sample/ なので ../../） -->
+	<script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js" defer></script>
+	<script src="../../common/ui/markdown.js" defer></script>
+	<script src="../../common/ui/footer.js" defer></script>
+
+	<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+	<link rel="stylesheet" href="../../common/css/layout-one-line-content.css">
+	<link rel="stylesheet" href="../../common/css/bg-off-white.css">
+</head>
+<body>
+	<main>
+		<p><a href="../../index.html">← トップへ戻る</a></p>
+
+		<!-- 記事はMarkdownで書ける。インデントは自動で揃えられる -->
+		<markdown-parser>
+			# サンプルページ
+
+			このページをフォルダごとコピーして、新しいページを作ります。
+
+			## 手順
+
+			1. `pages/sample/` をコピーして `pages/好きな名前/` にする
+			2. `&lt;title&gt;` と本文を書き換える
+			3. トップの `index.html` に `&lt;link-horizontal&gt;` でリンクを足す
+
+			> 引用や `コード`、表なども普通のMarkdownと同じように書けます。
+			> ただし `&lt;` `&gt;` はそのまま書くとHTMLタグ扱いになるので、`&amp;lt;` `&amp;gt;` と書きます。
+		</markdown-parser>
+	</main>
+
+	<footer-copyright author="あなたの名前" repo="https://github.com/"></footer-copyright>
+</body>
+</html>

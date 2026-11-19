@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="robots" content="noindex">
+	<title>ページが見つかりません | サイト名</title>
+	<!-- 404ページは任意の階層のURLで表示されるため、相対パスが使えない。
+	     サイトの起点（ベースパス）をJSで判定し、data-base-* を持つ要素のパスに先頭を足す。
+	       ・ユーザー名.github.io / 独自ドメイン → /
+	       ・ユーザー名.github.io/リポジトリ名/  → /リポジトリ名/
+	     判定方法：URLの1階層目を候補にし、そこに favicon.svg があればサイトの起点とみなす -->
+	<link rel="icon" data-base-href="favicon.svg" type="image/svg+xml">
+	<script>
+		(async () => {
+			const first = location.pathname.split('/')[1];
+			let base = '/';
+			if (first && !first.includes('.')) {
+				try {
+					const res = await fetch(`/${first}/favicon.svg`, { method: 'HEAD' });
+					if (res.ok) base = `/${first}/`;
+				} catch {}
+			}
+			const apply = () => {
+				document.querySelectorAll('[data-base-href]').forEach(el => el.setAttribute('href', base + el.dataset.baseHref));
+				document.querySelectorAll('[data-base-src]').forEach(el => el.setAttribute('src', base + el.dataset.baseSrc));
+				const footer = document.createElement('script');
+				footer.src = base + 'common/ui/footer.js';
+				document.head.append(footer);
+			};
+			document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', apply) : apply();
+		})();
+	</script>
+	<style>
+		body { margin: 0; font-family: sans-serif; background: #f8f9fa; }
+		.not-found {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+			padding: 4rem 1rem 0;
+		}
+		.not-found .code {
+			margin: 0;
+			font-size: clamp(4rem, 18vw, 8rem);
+			font-weight: 700;
+			line-height: 1;
+			color: #9ca3af;
+			letter-spacing: 0.05em;
+		}
+		.not-found .logo {
+			width: min(160px, 50%);
+			height: auto;
+			margin-top: 1rem;
+		}
+		.not-found h1 {
+			margin: 2rem 0 0.5rem;
+			font-size: 1.5rem;
+		}
+		.not-found p {
+			margin: 0.25rem 0;
+			color: #4b5563;
+			line-height: 1.8;
+		}
+		.not-found .home {
+			display: inline-block;
+			margin-top: 2.5rem;
+			padding: 0.75rem 2rem;
+			border: 1px solid #d4d4d4;
+			border-radius: 999px;
+			background: #fff;
+			color: #111827;
+			text-decoration: none;
+			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+			transition: box-shadow 0.2s, transform 0.2s;
+		}
+		.not-found .home:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+		}
+	</style>
+</head>
+<body>
+	<main>
+		<section class="not-found">
+			<p class="code">404</p>
+			<img class="logo" data-base-src="common/img/logo.svg" alt="">
+			<h1>ページが見つかりません</h1>
+			<p>URLが間違っているか、ページが移動・削除された可能性があります。</p>
+			<a class="home" data-base-href="" href="/">トップページに戻る</a>
+		</section>
+	</main>
+	<footer-copyright author="あなたの名前" repo="https://github.com/"></footer-copyright>
+</body>
+</html>

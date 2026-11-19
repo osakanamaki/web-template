@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- ✏️ サイト名 -->
+	<title>サイト名</title>
+	<meta name="description" content="✏️ サイトの説明文（検索結果やSNSで表示されます）">
+
+	<!-- 部品（WebComponents）の読み込み。使わない部品は消してOK -->
+	<script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js" defer></script>
+	<script src="common/ui/markdown.js" defer></script>
+	<script src="common/ui/p-card.js" defer></script>
+	<script src="common/ui/link.js" defer></script>
+	<script src="common/ui/footer.js" defer></script>
+
+	<link rel="icon" href="favicon.svg" type="image/svg+xml">
+	<link rel="stylesheet" href="common/css/layout-one-line-content.css">
+	<link rel="stylesheet" href="common/css/scroll-snap.css">
+	<link rel="stylesheet" href="common/css/bg-off-white.css">
+	<link rel="stylesheet" href="common/css/grid-width-split.css">
+</head>
+<body>
+	<!-- 全画面のバナー画像。いらなければ <header> ごと消し、scroll-snap.css の読み込みも外す -->
+	<header>
+		<img src="common/img/banner.svg" alt="バナー">
+	</header>
+
+	<main>
+		<h1>サイト名<img src="common/img/logo.svg" alt=""></h1>
+		<p>✏️ ここにサイトの紹介文を書きます。</p>
+
+		<!-- 横長のリンクカード（ページ一覧向き） -->
+		<link-horizontal
+			url="pages/sample/index.html"
+			title="サンプルページ"
+			description="下層ページの雛形です。コピーして使ってください"
+			image="common/img/thumb-1.svg">
+		</link-horizontal>
+
+		<link-horizontal
+			url="https://x.com/"
+			title="X（Twitter）"
+			description="外部サイトへのリンクには自動で↗アイコンが付きます"
+			image="common/img/thumb-2.svg">
+		</link-horizontal>
+
+		<hr>
+
+		<!-- 画像＋文章のカード。中身はMarkdownでそのまま書ける -->
+		<p-card image="common/img/icon.svg" position="right" alt="アイコン" width="250px">
+			# あなたの名前
+
+			✏️ 自己紹介をここに書きます。**太字** や [リンク](https://example.com) など、Markdownが使えます。
+
+			- [X（Twitter）](https://x.com/)
+			- [GitHub](https://github.com/)
+		</p-card>
+
+		<p-card image="common/img/thumb-3.svg" caption="画像の下に出るキャプション">
+			### 画像を左に置く例
+			position を省略すると画像は左に並びます。
+		</p-card>
+
+		<h2>作品</h2>
+
+		<!-- 画像の上に文字が乗るカード。class="w-33" で横3列、w-50 で2列 -->
+		<link-overlay
+			class="w-33"
+			url="#"
+			title="作品1"
+			description="説明文"
+			image="common/img/thumb-1.svg">
+		</link-overlay>
+
+		<link-overlay
+			class="w-33"
+			url="#"
+			title="作品2"
+			description="説明文"
+			image="common/img/thumb-2.svg">
+		</link-overlay>
+
+		<link-overlay
+			class="w-33"
+			url="#"
+			title="作品3"
+			description="説明文"
+			image="common/img/thumb-3.svg">
+		</link-overlay>
+	</main>
+
+	<!-- ✏️ author と repo を自分のものに -->
+	<footer-copyright author="あなたの名前" repo="https://github.com/"></footer-copyright>
+</body>
+</html>
